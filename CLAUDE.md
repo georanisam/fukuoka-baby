@@ -14,23 +14,26 @@
 ## 위치·배포
 
 - **작업(빌드·git) 폴더**: `C:\Users\user\Desktop\hackthon\fukuoka-baby` — H: 드라이브(구글 드라이브 동기화)는
-  느려서 git 작업은 반드시 C:에서 한다. H: 폴더(`H:\다른 컴퓨터\2026 데스크탑\2026 전일중학교\바이브코딩\fukuoka-baby`)는
+  느려서 git 작업은 반드시 C:에서 한다. H: 드라이브의 `바이브코딩\fukuoka-baby` 폴더는
   사본이다. 미러 명령:
-  `robocopy "C:\Users\user\Desktop\hackthon\fukuoka-baby" "H:\다른 컴퓨터\2026 데스크탑\2026 전일중학교\바이브코딩\fukuoka-baby" /MIR /XD .git .vercel`
-- **GitHub**: https://github.com/georanisam/fukuoka-baby (private), `main` 브랜치.
-- **Vercel**: 프로젝트 `fukuoka-baby` (georanisam-7890 계정). 배포 흐름: git commit → `git push` → Vercel 자동 배포.
+  `robocopy "C:\Users\user\Desktop\hackthon\fukuoka-baby" "<H: 사본 폴더>" /MIR /XD .git .vercel /XF .env.local`
+- **GitHub**: https://github.com/georanisam/fukuoka-baby (공개), `main` 브랜치.
+- **Vercel**: 프로젝트 `fukuoka-baby` (개인 계정). 배포 흐름: git commit → `git push` → Vercel 자동 배포.
   CLI 직접 배포(`vercel --prod`)는 하지 않는다.
 - git 커밋 아이덴티티는 repo-local `georanisam <georanisam@users.noreply.github.com>`.
 - **도메인(주소)을 바꾸면 사용자 폰의 저장 데이터가 새로 시작된다**(localStorage는 주소별). 프로젝트/도메인 이름 변경 금지.
 
 ## 구조 (빌드 없는 정적 사이트)
 
+**앱 파일은 전부 public/ 안에 있다.** Vercel은 public/만 배포하므로 저장소 루트의 CLAUDE.md 등은 사이트에 노출되지 않는다.
+**공개 저장소이므로 비밀 키·토큰·개인 경로를 커밋하지 말 것**(.env*는 .gitignore에 있음).
+
 | 파일 | 역할 |
 |---|---|
-| `index.html` | 앱 전체(HTML+CSS+JS 한 파일) |
-| `manifest.json` | 홈 화면 앱 설정 |
-| `sw.js` | 오프라인 캐시(stale-while-revalidate). **`CACHE` 이름의 버전 숫자(v1→v2)를 올리면 폰이 옛 캐시를 버린다** |
-| `icon-192/512.png`, `apple-touch-icon.png` | 앱 아이콘(아기 얼굴 + 종이비행기) |
+| `public/index.html` | 앱 전체(HTML+CSS+JS 한 파일) |
+| `public/manifest.json` | 홈 화면 앱 설정 |
+| `public/sw.js` | 오프라인 캐시(stale-while-revalidate). **`CACHE` 이름의 버전 숫자(v1→v2)를 올리면 폰이 옛 캐시를 버린다** |
+| `public/icon-192/512.png`, `public/apple-touch-icon.png` | 앱 아이콘(아기 얼굴 + 종이비행기) |
 
 ## 저장 데이터 (localStorage 키)
 
